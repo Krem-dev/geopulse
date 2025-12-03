@@ -48,43 +48,43 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Center(
-            child: Image.asset(
-              'assets/icons/app_icon.png',
-              fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width * 0.8,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: AppColors.primary.withOpacity(0.3),
-                );
-              },
-            ),
-          ),
-          Container(
-            color: Color(0xFF0A1F3D).withOpacity(0.95),
-          ),
-          Positioned(
-            bottom: 60,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: FadeTransition(
-                opacity: _fadeAnimation,
-                child: SizedBox(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Image.asset(
+                    'assets/icons/appIcon.png',
+                    fit: BoxFit.contain,
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.grey[200],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 60),
+                SizedBox(
                   width: 24,
                   height: 24,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
